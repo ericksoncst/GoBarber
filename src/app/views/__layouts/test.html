@@ -1,0 +1,25 @@
+<form action="/signup" method="POST">
+  <label for="avatar" ><img src="/images/avatar.svg" height="24"/></label>
+  <input type="file" name="avatar" id="avatar" />
+
+  <input type="text" name="name" placeholder="Nome completo" />
+  <input type="email" name="email" placeholder="Seu email" />
+  <input type="password" name="password" placeholder="Senha secreta" />
+
+  <label for="provider" >
+    <input type="checkbox" name="provider" id="provider" value="1" />
+    Sou cabelereiro
+  </label>
+  <button type="submit">Criar conta</button>
+  <a href="/">Já possuo conta</a>
+
+  <script type="text/javascript">
+    let avatarIput = document.getElementById('avatar');
+    let img = document.querySelector('label[for-avatar] img');
+
+    avatarIput.onchange = function(e) {
+      img.classList.add('preview');
+      img.src = URL.createObjectURL(e.target.files[0])
+    }
+  </script>
+</form>>
