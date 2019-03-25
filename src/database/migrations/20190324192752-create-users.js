@@ -26,10 +26,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      password_hash: {
+      provider: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: false
       },
       created_at: {
         allowNull: false,
