@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
   });
 
-  Appointment.assossiate = models => {
+  Appointment.associate = models => {
     Appointment.belongsTo(models.User, {
       foreignKey: "user_id",
     });
