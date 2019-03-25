@@ -1,28 +1,35 @@
-const express = require("express");
-
-const { User } = require('../models')
+const { User } = require("../models");
 
 class SessionController {
   async create(req, res) {
-    return res.render('auth/signin')
+    return res.render("auth/signin");
   }
 
-  async store(req,res) {
-    const {email, password} = req.body;
+  async store(req, res) {
+    const { email, password } = req.body;
 
-    const user = await  User.findOne({where: {email}});
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      console.log("usuário não encontrado");
-      return res.redirect('/');
+      req.flash("error","usuário não encontrado");
+      return res.redirect("/");
+    }
+
+    if (!(await user.checkPassword(password))) {
+      req.flash("error","Senha incorreta");
+      return res.redirect("/");
+    }
+
+    req.session.user = user;
+
+    return res.redirect("/app/dashboard");
   }
 
-    if (!await user.checkPassword(password)) {
-      console.log("Senha incorreta");
-      return res.redirect('/');
-  }
-
-    return res.redirect("/app/dashboard")
+  destroy(req, res) {
+    req.session.destroy(() => {
+      res.clearCookie("root");
+      res.redirect("/");
+    });
   }
 }
 
