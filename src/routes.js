@@ -21,6 +21,8 @@ routes.use((req, res, next) => {
   return next();
 });
 
+require("express-async-errors");
+
 routes.get("/files/:file", FileController.show);
 
 routes.get("/", guestMiddleware, SessionController.create);

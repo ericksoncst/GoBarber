@@ -10,11 +10,11 @@ class AppointmentController {
   async store(req, res) {
     const { id } = req.session.user;
     const { date } = req.body;
-    const provider_id = JSON.parse(req.params.provider);
+    const {provider} = req.params;
 
     await Appointment.create({
       user_id: id,
-      provider_id,
+      provider_id: provider,
       date,
     });
 
